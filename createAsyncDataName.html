@@ -1,0 +1,112 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+let url = '';
+arr = [];
+arr.push({code:01,name:'Адыгея республика'});
+arr.push({code:02,name:'Башкортостан республика'});
+arr.push({code:03,name:'Бурятия республика'});
+arr.push({code:04,name:'Алтай республика'});
+arr.push({code:05,name:'Дагестан республика'});
+arr.push({code:06,name:'Ингушетия республика'});
+arr.push({code:07,name:'Кабардино-Балкарская республика'});
+arr.push({code:08,name:'Калмыкия республика'});
+arr.push({code:09,name:'Карачаево-Черкесская республика'});
+arr.push({code:10,name:'Карелия республика'});
+arr.push({code:11,name:'Коми республика'});
+arr.push({code:12,name:'Марий Эл республика'});
+arr.push({code:13,name:'Мордовия республика'});
+arr.push({code:14,name:'Саха /Якутия/ республика'});
+arr.push({code:15,name:'Северная Осетия - Алания республика'});
+arr.push({code:16,name:'Татарстан республика'});
+arr.push({code:17,name:'Тыва республика'});
+arr.push({code:18,name:'Удмуртская республика'});
+arr.push({code:19,name:'Хакасия республика'});
+arr.push({code:20,name:'Чеченская республика'});
+arr.push({code:21,name:'Чувашская Республика - Чувашия'});
+arr.push({code:22,name:'Алтайский край'});
+arr.push({code:23,name:'Краснодарский край'});
+arr.push({code:24,name:'Красноярский край'});
+arr.push({code:25,name:'Приморский край'});
+arr.push({code:26,name:'Ставропольский край'});
+arr.push({code:27,name:'Хабаровский край'});
+arr.push({code:28,name:'Амурская область'});
+arr.push({code:29,name:'Архангельская область'});
+arr.push({code:30,name:'Астраханская область'});
+arr.push({code:31,name:'Белгородская область'});
+arr.push({code:32,name:'Брянская область'});
+arr.push({code:33,name:'Владимирская область'});
+arr.push({code:34,name:'Волгоградская область'});
+arr.push({code:35,name:'Вологодская область'});
+arr.push({code:36,name:'Воронежская область'});
+arr.push({code:37,name:'Ивановская область'});
+arr.push({code:38,name:'Иркутская область'});
+arr.push({code:39,name:'Калининградская область'});
+arr.push({code:40,name:'Калужская область'});
+arr.push({code:41,name:'Камчатский край'});
+arr.push({code:42,name:'Кемеровская область'});
+arr.push({code:43,name:'Кировская область'});
+arr.push({code:44,name:'Костромская область'});
+arr.push({code:45,name:'Курганская область'});
+arr.push({code:46,name:'Курская область'});
+arr.push({code:47,name:'Ленинградская область'});
+arr.push({code:48,name:'Липецкая область'});
+arr.push({code:49,name:'Магаданская область'});
+arr.push({code:50,name:'Московская область'});
+arr.push({code:51,name:'Мурманская область'});
+arr.push({code:52,name:'Нижегородская область'});
+arr.push({code:53,name:'Новгородская область'});
+arr.push({code:54,name:'Новосибирская область'});
+arr.push({code:55,name:'Омская область'});
+arr.push({code:56,name:'Оренбургская область'});
+arr.push({code:57,name:'Орловская область'});
+arr.push({code:58,name:'Пензенская область'});
+arr.push({code:59,name:'Пермский край'});
+arr.push({code:60,name:'Псковская область'});
+arr.push({code:61,name:'Ростовская область'});
+arr.push({code:62,name:'Рязанская область'});
+arr.push({code:63,name:'Самарская область'});
+arr.push({code:64,name:'Саратовская область'});
+arr.push({code:65,name:'Сахалинская область'});
+arr.push({code:66,name:'Свердловская область'});
+arr.push({code:67,name:'Смоленская область'});
+arr.push({code:68,name:'Тамбовская область'});
+arr.push({code:69,name:'Тверская область'});
+arr.push({code:70,name:'Томская область'});
+arr.push({code:71,name:'Тульская область'});
+arr.push({code:72,name:'Тюменская область'});
+arr.push({code:73,name:'Ульяновская область'});
+arr.push({code:74,name:'Челябинская область'});
+arr.push({code:75,name:'Забайкальский край'});
+arr.push({code:76,name:'Ярославская область'});
+arr.push({code:77,name:'Москва город'});
+arr.push({code:78,name:'Санкт-Петербург город'});
+arr.push({code:79,name:'Еврейская автономная область'});
+arr.push({code:83,name:'Ненецкий автономный округ'});
+arr.push({code:86,name:'Ханты-Мансийский Автономный округ - Югра автономный округ'});
+arr.push({code:87,name:'Чукотский автономный округ'});
+arr.push({code:89,name:'Ямало-Ненецкий автономный округ'});
+arr.push({code:91,name:'Крым республика'});
+arr.push({code:92,name:'Севастополь город'});
+arr.push({code:99,name:'Байконур город'});
+    arr.map(async(i)=>{
+let response = await fetch(url,{
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+    body: JSON.stringify(i)
+})
+})
+</script>
+</html>
