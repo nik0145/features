@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Color picker | Canvas pixel manipulation</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrap {
+        align-items: stretch;
+        display: flex;
+      }
+      .map {
+        margin: 10px;
+        /* width: 512px; */
+        background-color: red;
+        /* height: 1024px; */
+      }
+      .inputs {
+        margin: 10px;
+        width: 400px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="map">
+        <canvas id="canvas" width="512" height="1024"></canvas>
+      </div>
+      <div class="inputs">
+        <p>hovered-color: <span id="hovered-color">1</span></p>
+        <p>Selected color: <span id="selected-color">1</span></p>
+        <!-- <input id="input" type="text" value="" /> -->
+        <!-- <input id="button" type="button" value="go" /> -->
+        <input id="generate" type="button" value="generate" />
+      </div>
+    </div>
+  </body>
+  <script>
+    // получаем черно-белую картинку и генерируем из нее двумерный массив c 1 0 в засимости от цвета на этой картинке
+    // input.oninput = function () {
+    //   result.innerHTML = input.value;
+    // };
+    let img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = "./map3.jpg";
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    let c_back = {
+      height: 512,
+      width: 1028,
+    };
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+      img.style.display = "none";
+    };
+    let hoveredColor = document.getElementById("hovered-color");
+    let selectedColor = document.getElementById("selected-color");
+
+    function pick(event, destination) {
+      console.log("event.layerX", event.layerX, "event.layerY", event.layerY);
+      let x = event.layerX - 11;
+      let y = event.layerY - 54;
+      // console.log(x,y);
+      let pixel = ctx.getImageData(x, y, 1, 1);
+      let data = pixel.data;
+      if (data[0] === 255 || data[0] === 254) {
+        console.log(0);
+      }
+      const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+      // destination.style.background = rgba;
+      destination.textContent = rgba;
+
+      return rgba;
+    }
+    canvas.addEventListener("mousemove", function (event) {
+      pick(event, hoveredColor);
+    });
+    canvas.addEventListener("click", function (event) {
+      pick(event, selectedColor);
+    });
+    generate.addEventListener("click", function (event) {
+      let matrix = [];
+      let w = 512;
+      let h = 1024;
+      let kek = [];
+      // pick(event, selectedColor);
+      for (let y = 0; y < h; y++) {
+        matrix[y] = [];
+        for (let x = 0; x < w; x++) {
+          //colonne
+
+          let imgd = ctx.getImageData(x, y, 1, 1);
+
+          let data = imgd.data;
+          //255 это белый следовательно 1 это лес
+          if (data[0] === 255 || data[0] === 254) {
+            matrix[y][x] = 0;
+          } else {
+            matrix[y][x] = 1;
+          }
+        }
+      }
+      console.log(matrix);
+      debugger;
+    });
+  </script>
+</html>
