@@ -260,80 +260,173 @@ function dijkstraAlgorithmExample(): void {
 }
 dijkstraAlgorithmExample();
 function binaryTreeExample(): void {
-    const tree = [
+  const tree = [
+    {
+      v: 5,
+      c: [
         {
-            v: 5,
-            c: [
-                {
-                    v: 10,
-                    c: [
-                        {
-                            v: 11,
-                        },
-                    ],
-                },
-                {
-                    v: 7,
-                    c: [
-                        {
-                            v: 5,
-                            c: [
-                                {
-                                    v: 1,
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
+          v: 10,
+          c: [
+            {
+              v: 11,
+            },
+          ],
         },
         {
-            v: 5,
-            c: [
+          v: 7,
+          c: [
+            {
+              v: 5,
+              c: [
                 {
-                    v: 10,
+                  v: 1,
                 },
-                {
-                    v: 15,
-                },
-            ],
+              ],
+            },
+          ],
         },
-    ];
-    function binaryTreeRecursive(tree) {
-        //* рекурсивно пробегаемся по дереву и считаем сумму всех узлов
-        let sum = 0;
-        tree.forEach((node) => {
-            sum += node.v;
-            if (!node.c) {
-                return node.v;
-            }
-            sum += binaryTreeRecursive(node.c);
-        });
-        return sum;
+      ],
+    },
+    {
+      v: 5,
+      c: [
+        {
+          v: 10,
+        },
+        {
+          v: 15,
+        },
+      ],
+    },
+  ];
+  function binaryTreeRecursive(tree) {
+    //* рекурсивно пробегаемся по дереву и считаем сумму всех узлов
+    let sum = 0;
+    tree.forEach((node) => {
+      sum += node.v;
+      if (!node.c) {
+        return node.v;
+      }
+      sum += binaryTreeRecursive(node.c);
+    });
+    return sum;
+  }
+  const value = binaryTreeRecursive(tree); // *69
+  console.log(value);
+  function binaryTreeIteration(tree) {
+    //* делаем тоже самое только итеративно
+    if (!tree.length) {
+      return 0;
     }
-    const value = binaryTreeRecursive(tree); // *69
-    console.log(value);
-    function binaryTreeIteration(tree) {
-        //* делаем тоже самое только итеративно
-        if (!tree.length) {
-            return 0;
-        }
-        let sum = 0;
-        let stack = [];
+    let sum = 0;
+    let stack = [];
 
-        tree.forEach((node) => {
-            stack.push(node);
-        });
-        while (stack.length) {
-            const node = stack.pop();
-            sum += node.v;
-            if (node.c) {
-                node.c.forEach((child) => stack.push(child));
-            }
-        }
-        return sum;
+    tree.forEach((node) => {
+      stack.push(node);
+    });
+    while (stack.length) {
+      const node = stack.pop();
+      sum += node.v;
+      if (node.c) {
+        node.c.forEach((child) => stack.push(child));
+      }
     }
-    const valueIter = binaryTreeIteration(tree);//* 69
-    console.log(valueIter)
+    return sum;
+  }
+  const valueIter = binaryTreeIteration(tree); //* 69
+  console.log(valueIter);
 }
 binaryTreeExample();
+
+function cachFunctionExample() {
+  function cachFunction(fn: (n: number) => number): (n: number) => number {
+    const cache = {};
+    return function (n) {
+      if (cache[n]) {
+        console.log("взял из кеша");
+        return cache[n];
+      }
+      let result = fn(n);
+      cache[n] = result;
+      return result;
+    };
+  }
+  function factorial(n: number): number {
+    let result = 1;
+    while (n != 1) {
+      result += n;
+      n -= 1;
+    }
+    return result;
+  }
+  const cashFactorial = cachFunction(factorial);
+  cashFactorial(5);
+  cashFactorial(4);
+  cashFactorial(4);
+}
+cachFunctionExample();
+function binaryTreeItemExample() {
+  //* создание бинарного дерева
+  class BinaryTree {
+    root: TreeNode;
+    constructor() {
+      this.root = null;
+    }
+    add(value: number): void {
+      if (!this.root) {
+        this.root = new TreeNode(value);
+      } else {
+        let node = this.root;
+        let newNode = new TreeNode(value);
+        while (node) {
+          if (value > node.value) {
+            if (!node.right) {
+              break;
+            }
+            node = node.right;
+          } else {
+            if (!node.left) {
+              break;
+            }
+            node = node.left;
+          }
+        }
+        if (value > node.value) {
+          node.right = newNode;
+        } else {
+          node.left = newNode;
+        }
+      }
+    }
+    print(root = this.root): void {
+      if (!root) {
+        return;
+      }
+      console.log(root.value);
+      this.print(root.left);
+      this.print(root.right);
+    }
+  }
+  class TreeNode {
+    value: number;
+    left: TreeNode;
+    right: TreeNode;
+    constructor(value: number) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+  }
+  const tree = new BinaryTree();
+  tree.add(10);
+  tree.add(5);
+  tree.add(15);
+  tree.add(2);
+  tree.add(16);
+  tree.add(19);
+  tree.add(9);
+  tree.add(8);
+  tree.add(7);
+  tree.print();
+}
+binaryTreeItemExample();
